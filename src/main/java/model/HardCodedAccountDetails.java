@@ -11,10 +11,10 @@ import java.util.Properties;
  *
  * @author juhat
  */
-public class AccountDetails implements AccountDetailsProvider{
+public class HardCodedAccountDetails implements AccountDetailsProvider{
     Properties account;
     
-    public AccountDetails(){
+    public HardCodedAccountDetails(){
         this.account = new Properties();
         this.account.put("firstname", "jaykoe");
         this.account.put("lastname", "tili");

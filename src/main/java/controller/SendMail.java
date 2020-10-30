@@ -13,43 +13,43 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import model.AccountDetails;
+import model.HardCodedAccountDetails;
 import model.AccountDetailsProvider;
-import model.ServerDetails;
+import model.HardCodedServerDetails;
 import model.ServerDetailsProvider;
 
-import model.AccountDetails;
-import model.ServerDetails;
+import model.HardCodedAccountDetails;
+import model.HardCodedServerDetails;
 
 public class SendMail {
 
     private String to;
     private String subject;
     private String messageBody;
-    
+
     private AccountDetailsProvider accountDetailsProvider;
-    
+
     private ServerDetailsProvider serverDetailsProvider;
-    
+
     private Session session;
-    
+
     public SendMail(String to, String subject, String messageBody) {
         this.to = to;
         this.subject = subject;
         this.messageBody = messageBody;
-        this.accountDetailsProvider = new AccountDetails();
-        this.serverDetailsProvider = new ServerDetails();
-        
+        this.accountDetailsProvider = new HardCodedAccountDetails();
+        this.serverDetailsProvider = new HardCodedServerDetails();
+
         this.session = Session.getInstance(serverDetailsProvider.getServerProperties(),
                 new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(accountDetailsProvider.getAccountDetail("username"), accountDetailsProvider.getAccountDetail("password"));
-                    }
-                });
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(accountDetailsProvider.getAccountDetail("username"), accountDetailsProvider.getAccountDetail("password"));
+            }
+        });
         System.out.println("SendEmail.constructor() complete");
     }
-    
-    public void send(){
+
+    public void send() {
         try {
 
             Message message = new MimeMessage(session);
@@ -62,7 +62,7 @@ public class SendMail {
             message.setText(messageBody);
 
             Transport.send(message);
-            
+
             //TODO: add event to logfile
             System.out.println("SendEmail.send() complete");
 
@@ -71,33 +71,7 @@ public class SendMail {
             e.printStackTrace();
         }
     }
-
-    public AccountDetailsProvider getAccountDetailsProvider() {
-        return accountDetailsProvider;
-    }
-
-    public void setAccountDetailsProvider(AccountDetailsProvider accountDetailsProvider) {
-        this.accountDetailsProvider = accountDetailsProvider;
-    }
-
-    public ServerDetailsProvider getServerDetailsProvider() {
-        return serverDetailsProvider;
-    }
-
-    public void setServerDetailsProvider(ServerDetailsProvider serverDetailsProvider) {
-        this.serverDetailsProvider = serverDetailsProvider;
-    }
-
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
     
-
     public Properties getServerDetails() {
         return serverDetailsProvider.getServerProperties();
     }
@@ -106,24 +80,12 @@ public class SendMail {
         return to;
     }
 
-    public void setTo(String to) {
-        this.to = to;
-    }
-
     public String getSubject() {
         return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
     }
 
     public String getMessageBody() {
         return messageBody;
     }
-
-    public void setMessageBody(String messageBody) {
-        this.messageBody = messageBody;
-    }
-
+    
 }

@@ -11,11 +11,11 @@ import java.util.Properties;
  *
  * @author juhat
  */
-public class ServerDetails implements ServerDetailsProvider{
+public class HardCodedServerDetails implements ServerDetailsProvider{
     private Properties serverProperties;
 
         
-    public ServerDetails(){
+    public HardCodedServerDetails(){
         this.serverProperties = new Properties();
         this.serverProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         this.serverProperties.put("mail.smtp.auth", true);

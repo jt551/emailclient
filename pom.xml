@@ -105,7 +105,8 @@
                 <version>0.8.2</version>
                 <configuration>
                     <excludes>
-                        <exclude>emailclient/ui/*</exclude>
+                        <exclude>ui/*</exclude>
+                        <exclude>main/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
