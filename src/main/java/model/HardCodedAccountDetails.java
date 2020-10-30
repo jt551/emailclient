@@ -18,7 +18,7 @@ public class HardCodedAccountDetails implements AccountDetailsProvider{
         this.account = new Properties();
         this.account.put("firstname", "jaykoe");
         this.account.put("lastname", "tili");
-        this.account.put("username", "jaykoe.tili@gmail.com");
+        this.account.put("username", "tili@gmail.com");
         this.account.put("password", "secretpassword");
     }
     
