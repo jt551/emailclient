@@ -62,8 +62,7 @@ public class SendMail {
             message.setText(messageBody);
 
             Transport.send(message);
-
-            //TODO: add event to logfile
+            
             System.out.println("SendEmail.send() complete");
 
         } catch (Exception e) {
