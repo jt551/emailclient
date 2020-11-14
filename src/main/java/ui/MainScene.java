@@ -13,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import controller.SendMail;
+import model.SendMail;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 

@@ -5,7 +5,7 @@
  */
 package controller;
 
-import controller.SendMail;
+import model.SendMail;
 import java.util.Properties;
 import model.HardCodedServerDetails;
 import model.ServerDetailsProvider;

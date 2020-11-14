@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLController">
+    <stylesheets>
+        <URL value="@/css/fxml.css" />
+    </stylesheets>
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="600.0">
+        <items>
+          <Button fx:id="sendMailbutton" mnemonicParsing="false" onAction="#sendButtonHandler" text="Send" textAlignment="CENTER" />
+            <Button id="getButton" fx:id="getMailButton" mnemonicParsing="false" onAction="#getButtonHandler" prefHeight="25.0" prefWidth="50.0" text="Get" />
+        </items>
+      </ToolBar>
+      <AnchorPane layoutX="159.0" layoutY="40.0" prefHeight="360.0" prefWidth="440.0" />
+      <ScrollPane layoutY="40.0" prefHeight="360.0" prefWidth="160.0" />
+   </children>
+</AnchorPane>

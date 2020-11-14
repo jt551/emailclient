@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package model;
 
 import java.util.Properties;
 import javax.mail.Message;
@@ -15,11 +15,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import model.HardCodedAccountDetails;
 import model.AccountDetailsProvider;
+import model.AccountDetailsProvider;
 import model.HardCodedServerDetails;
 import model.ServerDetailsProvider;
 
 import model.HardCodedAccountDetails;
+import model.HardCodedAccountDetails;
 import model.HardCodedServerDetails;
+import model.HardCodedServerDetails;
+import model.ServerDetailsProvider;
 
 public class SendMail {
 
