@@ -1,7 +1,7 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/maven,windows,netbeans,dotenv
 # Edit at https://www.toptal.com/developers/gitignore?templates=maven,windows,netbeans,dotenv
-
+dokumentaatio/
 ### dotenv ###
 .env
 

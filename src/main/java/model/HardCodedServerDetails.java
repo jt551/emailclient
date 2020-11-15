@@ -8,12 +8,11 @@ package model;
 import java.util.Properties;
 
 /**
- *
- * @author juhat
+ * Class for proving needed email server details for development purposes.
+ * Removed when local db for settings is implemented.
  */
 public class HardCodedServerDetails implements ServerDetailsProvider{
     private Properties serverProperties;
-
         
     public HardCodedServerDetails(){
         this.serverProperties = new Properties();

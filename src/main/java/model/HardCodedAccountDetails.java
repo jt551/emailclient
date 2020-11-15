@@ -8,11 +8,11 @@ package model;
 import java.util.Properties;
 
 /**
- *
- * @author juhat
+ * Class for proving needed email account details for development purposes.
+ * Removed when local db for settings is implemented.
  */
 public class HardCodedAccountDetails implements AccountDetailsProvider{
-    Properties account;
+    private Properties account;
     
     public HardCodedAccountDetails(){
         this.account = new Properties();

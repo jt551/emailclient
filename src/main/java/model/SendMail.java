@@ -7,23 +7,17 @@ package model;
 
 import java.util.Properties;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import model.HardCodedAccountDetails;
-import model.AccountDetailsProvider;
-import model.AccountDetailsProvider;
-import model.HardCodedServerDetails;
-import model.ServerDetailsProvider;
 
-import model.HardCodedAccountDetails;
-import model.HardCodedAccountDetails;
-import model.HardCodedServerDetails;
-import model.HardCodedServerDetails;
-import model.ServerDetailsProvider;
+/**
+ * Class for sending an email.
+ * Used by FXMLController EventHandler, that passes required parameters from user interface. 
+ * 
+ */
 
 public class SendMail {
 
@@ -36,7 +30,16 @@ public class SendMail {
     private ServerDetailsProvider serverDetailsProvider;
 
     private Session session;
-
+    
+    /**
+    * SendMail constructor.
+    * Requires three parameters from UI.
+    * @param to message recipient from user interface text field.
+    * @param subject message subject or title from user interface text field.
+    * @param messageBody message from user interface text area.
+    * 
+    * TODO: move session to send()
+    */
     public SendMail(String to, String subject, String messageBody) {
         this.to = to;
         this.subject = subject;
@@ -50,9 +53,15 @@ public class SendMail {
                 return new PasswordAuthentication(accountDetailsProvider.getAccountDetail("username"), accountDetailsProvider.getAccountDetail("password"));
             }
         });
-        System.out.println("SendEmail.constructor() complete");
+        System.out.println("SendEmail constructor complete");
     }
-
+    /**
+    * Send created message.
+    * Create new MimeMessage and use Transport to send it.
+    * 
+    * TODO: add session.
+    * exceptions back to controller
+    */
     public void send() {
         try {
 

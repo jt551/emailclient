@@ -16,7 +16,11 @@ import javafx.scene.layout.VBox;
 import model.SendMail;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-
+/**
+ * Old main ui class, to be removed
+ *
+ * @author juhat
+ */
 public class MainScene {
 
     private int heigth;
