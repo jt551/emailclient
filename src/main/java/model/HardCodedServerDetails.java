@@ -17,10 +17,12 @@ public class HardCodedServerDetails implements ServerDetailsProvider{
     public HardCodedServerDetails(){
         this.serverProperties = new Properties();
         this.serverProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        this.serverProperties.put("imapHost", "imap.gmail.com");
         this.serverProperties.put("mail.smtp.auth", true);
         this.serverProperties.put("mail.smtp.starttls.enable", true);
         this.serverProperties.put("mail.smtp.host", "smtp.gmail.com");
         this.serverProperties.put("mail.smtp.port", "587");
+        this.serverProperties.put("mail.store.protocol", "imaps");
     }
     
     @Override
