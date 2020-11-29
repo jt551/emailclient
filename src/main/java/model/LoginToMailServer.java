@@ -27,7 +27,7 @@ public class LoginToMailServer {
     }
 
     public void login() {
-        System.out.println("before new auth");
+        
         Authenticator authenticator = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -39,8 +39,9 @@ public class LoginToMailServer {
             Session session = Session.getInstance(emailAccount.getServerProperties(), authenticator);
             Store store = session.getStore("imaps");
             
-            store.connect(emailAccount.getServerProperties().getProperty("imapHost"), emailAccount.getAddress(), emailAccount.getPassword());
-                        
+            store.connect(emailAccount.getServerProperties().getProperty("incomingHost"), emailAccount.getAddress(), emailAccount.getPassword());
+            emailAccount.setStore(store);
+            
             System.out.println("---------------------");
             System.out.println("----  Logged in  ----");
             System.out.println("---------------------");

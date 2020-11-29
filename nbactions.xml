@@ -46,6 +46,7 @@
         <action>
             <actionName>CUSTOM-create jar file</actionName>
             <displayName>create jar file</displayName>
+            <preAction>build-with-dependencies</preAction>
             <goals>
                 <goal>package</goal>
             </goals>
