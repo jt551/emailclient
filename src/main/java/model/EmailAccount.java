@@ -24,7 +24,7 @@ public class EmailAccount {
         this.address = address;
         this.password = password;
         this.serverProperties = new Properties();
-        serverProperties.put("incomingHost", "imap.gmail.com");
+        serverProperties.put("imapHost", "imap.gmail.com");
         serverProperties.put("mail.store.protocol", "imaps");
 
         serverProperties.put("mail.transport.protocol", "smtps");

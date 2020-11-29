@@ -39,7 +39,7 @@ public class LoginToMailServer {
             Session session = Session.getInstance(emailAccount.getServerProperties(), authenticator);
             Store store = session.getStore("imaps");
             
-            store.connect(emailAccount.getServerProperties().getProperty("incomingHost"), emailAccount.getAddress(), emailAccount.getPassword());
+            store.connect(emailAccount.getServerProperties().getProperty("imapHost"), emailAccount.getAddress(), emailAccount.getPassword());
             emailAccount.setStore(store);
             
             System.out.println("---------------------");
