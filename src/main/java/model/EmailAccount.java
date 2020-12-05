@@ -19,11 +19,14 @@ public class EmailAccount {
     private Properties serverProperties;
     
     private Store store;
-
+    
+    private EmailFolderInTree rootFolder;
+    
     public EmailAccount(String address, String password) {
         this.address = address;
         this.password = password;
         this.serverProperties = new Properties();
+        this.rootFolder = new EmailFolderInTree(address);
         serverProperties.put("imapHost", "imap.gmail.com");
         serverProperties.put("mail.store.protocol", "imaps");
 
@@ -64,8 +67,10 @@ public class EmailAccount {
     public void setStore(Store store) {
         this.store = store;
     }
-    
-    
+
+    public EmailFolderInTree getRootFolder() {
+        return rootFolder;
+    }
     
     
 }

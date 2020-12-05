@@ -12,14 +12,14 @@ import javax.mail.Message;
  *
  * @author juhat
  */
-public class FolderInTreeItem<String> extends TreeItem{
+public class EmailFolderInTree<String> extends TreeItem{
     /**
      * Class to represent one folder in account and hold its messages.
      */
     private String name;
     private Message[] emailsInFolder;
 
-    public FolderInTreeItem(String name) {
+    public EmailFolderInTree(String name) {
         super(name);
         this.name = name;
         

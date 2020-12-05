@@ -5,10 +5,9 @@
  */
 package model;
 
-import controller.FXMLController;
+import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javax.mail.Authenticator;
 import javax.mail.Folder;
@@ -30,6 +29,7 @@ public class MainMail {
     private LoginToMailServer loginToMailServer;
     private GetFolders getFolders;
     private DisplayFolders displayFolders;
+    //private FXMLController fxmlController;
 
     private AccountDetailsProvider accountDetailsProvider;
     private ServerDetailsProvider serverDetailsProvider;
@@ -40,11 +40,12 @@ public class MainMail {
 
     private ObservableList<Message> messages;
 
-    public MainMail(String username, String password, TreeView treeView) {
+    public MainMail(String username, String password, TreeView treeView) throws IOException {
         this.accountDetailsProvider = new HardCodedAccountDetails();
         this.serverDetailsProvider = new HardCodedServerDetails();
         this.emailAccount = new EmailAccount(username, password);
         this.displayFolders = new DisplayFolders(treeView);
+        //this.fxmlController = getfxmlController();
     }
 
     public void login() throws MessagingException {
@@ -136,9 +137,30 @@ public class MainMail {
         //TreeItem treeItem = new TreeItem(emailAccount.getAddress());
         //treeItem.setExpanded(true);
         //treeItem.getChildren().add("INBOX");
-        this.displayFolders.setNewPrimaryFolder(emailAccount.getAddress());
-        this.displayFolders.addFolderToTree(inbox.getName());
+        //this.displayFolders.setNewPrimaryFolder(emailAccount.getAddress());
+        //this.displayFolders.addFolderToTree(inbox.getName());
         //Get messages in folders
+        
+        //
+        Folder[] folders = getFolders.getAllFoldersAsList();
+        addAllFoldersWithSubFoldersToTree(folders, emailAccount.getRootFolder());
+        
+        this.displayFolders.addFolderToTree(emailAccount.getRootFolder());
+        //
+        
         getInboxMessages();
+    }
+    
+    private void addAllFoldersWithSubFoldersToTree(Folder[] folders, EmailFolderInTree rootFolder) throws MessagingException{
+        for(Folder folder: folders){            
+            EmailFolderInTree<String> treeFolder = new EmailFolderInTree<String>(folder.getName());
+            rootFolder.getChildren().add(treeFolder);
+            
+            if(folder.getType() == Folder.HOLDS_FOLDERS){
+                Folder[] subFoldersAsList = folder.list();
+                // Recursive call for subfolders
+                addAllFoldersWithSubFoldersToTree(subFoldersAsList, rootFolder);
+            }
+        }
     }
 }
