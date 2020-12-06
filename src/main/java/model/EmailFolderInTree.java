@@ -5,6 +5,10 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import javax.mail.Message;
 
@@ -17,12 +21,20 @@ public class EmailFolderInTree<String> extends TreeItem{
      * Class to represent one folder in account and hold its messages.
      */
     private String name;
-    private Message[] emailsInFolder;
+    private ObservableList<Email> emailsInFolder;
 
     public EmailFolderInTree(String name) {
         super(name);
         this.name = name;
-        
+        this.emailsInFolder = FXCollections.observableArrayList();
+    }
+    
+    public void addEmail(Email email){
+        emailsInFolder.add(email);
+    }
+    
+    public List getEmailsInFolder(){
+        return emailsInFolder;
     }
     
     

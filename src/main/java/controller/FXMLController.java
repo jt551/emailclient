@@ -5,8 +5,13 @@
  */
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,13 +19,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.TreeView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebView;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
+import model.Email;
+import model.EmailFolderInTree;
 
 import model.MainMail;
 import model.SendMail;
@@ -70,18 +79,21 @@ public class FXMLController implements Initializable {
 
     @FXML
     private WebView mainWebView;
+    
+    @FXML
+    private TableView<Email> mainTableView;
 
     @FXML
-    private TableColumn<?, ?> senderColumn;
+    private TableColumn<Email, String> senderColumn;
 
     @FXML
-    private TableColumn<?, ?> subjectColumn;
+    private TableColumn<Email, String> subjectColumn;
 
     @FXML
-    private TableColumn<?, ?> timeColumn;
+    private TableColumn<Email, Date> timeColumn;
 
     @FXML
-    private TableColumn<?, ?> sizeColumn;
+    private TableColumn<Email, Integer> sizeColumn;
 
     /**
      * Initializes the controller class.
@@ -89,7 +101,8 @@ public class FXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        setTableViewValues();
+        setTreeHandler();
     }
 
     @FXML
@@ -102,6 +115,8 @@ public class FXMLController implements Initializable {
             userMessageLabel.setText("Auth error : " + e.getMessage());
         } catch (MessagingException e) {
             userMessageLabel.setText("Error in login process : " + e.getMessage());
+        } catch (IOException ex) {
+            userMessageLabel.setText("IO Error : " + ex.getMessage());
         }
     }
 
@@ -118,6 +133,25 @@ public class FXMLController implements Initializable {
 
     public TreeView<String> getLeftTreeView() {
         return leftTreeView;
+    }
+    
+    public TableView<Email> getTableView(){
+        return this.mainTableView;
+    }
+
+    private void setTableViewValues() {
+        senderColumn.setCellValueFactory(new PropertyValueFactory<Email, String>("sender"));
+        subjectColumn.setCellValueFactory(new PropertyValueFactory<Email, String>("subject"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<Email, Date>("date"));
+        sizeColumn.setCellValueFactory(new PropertyValueFactory<Email, Integer>("size"));
+    }
+
+    private void setTreeHandler() {
+        leftTreeView.setOnMouseClicked( e -> {
+            EmailFolderInTree<String> selectedFolder = (EmailFolderInTree<String>)leftTreeView.getSelectionModel().getSelectedItem();
+            mainTableView.setItems((ObservableList<Email>) selectedFolder.getEmailsInFolder());
+        }
+        );
     }
 
 }

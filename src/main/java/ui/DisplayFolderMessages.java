@@ -5,13 +5,17 @@
  */
 package ui;
 
+import controller.FXMLController;
+
 /**
  *
  * @author juhat
  */
 public class DisplayFolderMessages {
+    /**
+     * Display emails in a folder at TableView FX component
+     */
     
-    
-    
+    private FXMLController fxml;
     
 }

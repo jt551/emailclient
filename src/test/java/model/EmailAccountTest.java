@@ -92,5 +92,41 @@ public class EmailAccountTest {
         emailAccount.setServerProperties(testProperties);
         assertEquals(emailAccount.getServerProperties().getProperty("imapHost"), "newImapHost");   
     }
+
+    /**
+     * Test of getStore method, of class EmailAccount.
+     */
+    @Test
+    public void testGetStore() {
+        System.out.println("getStore");
+        EmailAccount instance = null;
+        Store expResult = null;
+        Store result = instance.getStore();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setStore method, of class EmailAccount.
+     */
+    @Test
+    public void testSetStore() {
+        
+    }
+
+    /**
+     * Test of getRootFolder method, of class EmailAccount.
+     */
+    @Test
+    public void testGetRootFolder() {
+        System.out.println("getRootFolder");
+        EmailAccount instance = null;
+        EmailFolderInTree expResult = null;
+        EmailFolderInTree result = instance.getRootFolder();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

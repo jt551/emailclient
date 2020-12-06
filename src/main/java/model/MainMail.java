@@ -131,6 +131,7 @@ public class MainMail {
 
     private void getFolders() throws MessagingException {
         this.getFolders = new GetFolders(emailAccount.getStore());
+        //test use only delete when not needed 
         this.inbox = getFolders.getInboxFolder();
 
         //Set folders for ui
@@ -142,8 +143,9 @@ public class MainMail {
         //Get messages in folders
         
         //
-        Folder[] folders = getFolders.getAllFoldersAsList();
-        addAllFoldersWithSubFoldersToTree(folders, emailAccount.getRootFolder());
+        getFolders.getAllFolders(emailAccount.getRootFolder());
+        //Folder[] folders = getFolders.getAllFoldersAsList();
+        //addAllFoldersWithSubFoldersToTree(folders, emailAccount.getRootFolder());
         
         this.displayFolders.addFolderToTree(emailAccount.getRootFolder());
         //
@@ -151,7 +153,8 @@ public class MainMail {
         getInboxMessages();
     }
     
-    private void addAllFoldersWithSubFoldersToTree(Folder[] folders, EmailFolderInTree rootFolder) throws MessagingException{
+    //moved
+    /*private void addAllFoldersWithSubFoldersToTree(Folder[] folders, EmailFolderInTree rootFolder) throws MessagingException{
         for(Folder folder: folders){            
             EmailFolderInTree<String> treeFolder = new EmailFolderInTree<String>(folder.getName());
             rootFolder.getChildren().add(treeFolder);
@@ -162,5 +165,5 @@ public class MainMail {
                 addAllFoldersWithSubFoldersToTree(subFoldersAsList, rootFolder);
             }
         }
-    }
+    }*/
 }
