@@ -98,13 +98,7 @@ public class EmailAccountTest {
      */
     @Test
     public void testGetStore() {
-        System.out.println("getStore");
-        EmailAccount instance = null;
-        Store expResult = null;
-        Store result = instance.getStore();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -120,13 +114,7 @@ public class EmailAccountTest {
      */
     @Test
     public void testGetRootFolder() {
-        System.out.println("getRootFolder");
-        EmailAccount instance = null;
-        EmailFolderInTree expResult = null;
-        EmailFolderInTree result = instance.getRootFolder();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }
