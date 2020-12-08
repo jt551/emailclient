@@ -9,6 +9,7 @@ import java.io.IOException;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javax.mail.BodyPart;
@@ -34,24 +35,23 @@ public class DisplayEmail extends Service {
     private WebEngine webEngine;
     private StringBuffer stringBuffer;
     private Message message;
+    @FXML
+    private Label userMessageLabel;
     
-    public DisplayEmail(WebEngine webEngine) {        
+    public DisplayEmail(WebEngine webEngine, Label userMessageLabel) {        
         this.webEngine = webEngine;
         this.stringBuffer = new StringBuffer();
-        // if succeeded
-        setOnSucceeded(s -> {
-            //code if Service succeeds
+        this.userMessageLabel = userMessageLabel;
+        
+        // What happens when service
+        setOnSucceeded(s -> {            
             displayEmail();
         });
-
-        // if failed
         setOnFailed(fail -> {
-            //code it Service fails
-        });
-
-        //if cancelled
+            userMessageLabel.setText("Display service failed");
+        });        
         setOnCancelled(cancelled->{
-            //code if Service get's cancelled
+            userMessageLabel.setText("Display service cancelled");
         });
     }
 

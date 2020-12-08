@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -104,7 +102,7 @@ public class FXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         setTableViewValues();
         setTreeHandler();
-        this.displayEmail = new DisplayEmail(mainWebView.getEngine());
+        this.displayEmail = new DisplayEmail(mainWebView.getEngine(), userMessageLabel);
         setTableHandler();
     }
 
@@ -171,7 +169,7 @@ public class FXMLController implements Initializable {
                     displayEmail.restart();
                 }
             }catch(Exception ex){
-                ex.printStackTrace();
+                userMessageLabel.setText(ex.getMessage());
             }
         });
     }
