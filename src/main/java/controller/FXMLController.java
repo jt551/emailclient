@@ -33,6 +33,7 @@ import model.EmailFolderInTree;
 
 import model.MainMail;
 import model.SendMail;
+import ui.DisplayEmail;
 
 /**
  * FXML Controller class
@@ -43,6 +44,7 @@ public class FXMLController implements Initializable {
 
     private SendMail sendMail;
     private MainMail mainMail;
+    private DisplayEmail displayEmail;
 
     @FXML
     private AnchorPane rootAnchorPane;
@@ -79,7 +81,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private WebView mainWebView;
-    
+
     @FXML
     private TableView<Email> mainTableView;
 
@@ -98,11 +100,12 @@ public class FXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setTableViewValues();
         setTreeHandler();
+        this.displayEmail = new DisplayEmail(mainWebView.getEngine());
+        setTableHandler();
     }
 
     @FXML
@@ -134,8 +137,8 @@ public class FXMLController implements Initializable {
     public TreeView<String> getLeftTreeView() {
         return leftTreeView;
     }
-    
-    public TableView<Email> getTableView(){
+
+    public TableView<Email> getTableView() {
         return this.mainTableView;
     }
 
@@ -147,11 +150,29 @@ public class FXMLController implements Initializable {
     }
 
     private void setTreeHandler() {
-        leftTreeView.setOnMouseClicked( e -> {
-            EmailFolderInTree<String> selectedFolder = (EmailFolderInTree<String>)leftTreeView.getSelectionModel().getSelectedItem();
+        leftTreeView.setOnMouseClicked(e -> {
+            EmailFolderInTree<String> selectedFolder = (EmailFolderInTree<String>) leftTreeView.getSelectionModel().getSelectedItem();
+            if (selectedFolder == null) {
+                return;
+            }
             mainTableView.setItems((ObservableList<Email>) selectedFolder.getEmailsInFolder());
         }
         );
     }
 
+    private void setTableHandler() {
+        mainTableView.setOnMouseClicked(e -> {
+            Email email = (Email) mainTableView.getSelectionModel().getSelectedItem();
+            
+             try {
+                if (email != null) {
+                    userMessageLabel.setText("Show email in webview");
+                    displayEmail.setMessage(email.getMessage());
+                    displayEmail.restart();
+                }
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+        });
+    }
 }
