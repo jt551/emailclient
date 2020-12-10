@@ -22,16 +22,14 @@ import static org.junit.Assert.*;
  */
 public class SendMailTest {
 
-    SendMail sendMail;    
-    Properties testProperties;
+    SendMail sendMail;
 
     public SendMailTest() {
     }
 
     @Before
     public void setUp() {
-        sendMail = new SendMail("test@gmail.com", "This is a java program test", "Message body");
-        testProperties = sendMail.getServerDetails();
+        
     }
 
     @After
@@ -41,13 +39,7 @@ public class SendMailTest {
     @Test
     public void testConstructorMethod() {
 
-        assertEquals(sendMail.getTo(), "test@gmail.com");
-        assertEquals(sendMail.getSubject(), "This is a java program test");
-        assertEquals(sendMail.getMessageBody(), "Message body");
-        
-        assertEquals(testProperties.get("mail.smtp.host"), "smtp.gmail.com");        
-        assertEquals(testProperties.get("mail.smtp.port"), "587");
-        assertEquals(testProperties.get("mail.smtp.starttls.enable"), true);       
+             
     }
     
     

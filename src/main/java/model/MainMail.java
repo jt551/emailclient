@@ -98,7 +98,9 @@ public class MainMail {
         }
         return null;
     }
-
+    public String getEmailAddress(){
+        return emailAccount.getAddress();
+    }
     private void getInboxMessages() throws MessagingException {
         this.messages = FXCollections.observableArrayList();
         try {

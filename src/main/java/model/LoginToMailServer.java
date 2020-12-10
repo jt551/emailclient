@@ -41,7 +41,7 @@ public class LoginToMailServer {
             
             store.connect(emailAccount.getServerProperties().getProperty("imapHost"), emailAccount.getAddress(), emailAccount.getPassword());
             emailAccount.setStore(store);
-            
+            emailAccount.setSession(session);
             System.out.println("---------------------");
             System.out.println("----  Logged in  ----");
             System.out.println("---------------------");

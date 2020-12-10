@@ -6,6 +6,7 @@
 package model;
 
 import java.util.Properties;
+import javax.mail.Session;
 import javax.mail.Store;
 
 /**
@@ -19,6 +20,8 @@ public class EmailAccount {
     private Properties serverProperties;
     
     private Store store;
+    
+    private Session session;
     
     private EmailFolderInTree rootFolder;
     
@@ -70,6 +73,14 @@ public class EmailAccount {
 
     public EmailFolderInTree getRootFolder() {
         return rootFolder;
+    }
+
+    public Session getSession() {
+        return this.session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
     
     

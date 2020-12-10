@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Separator;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -64,12 +65,15 @@ public class FXMLController implements Initializable {
 
     @FXML
     private Button loginButton;
+    
+    @FXML
+    private Button logoutButton;
 
     @FXML
-    private Button getMailButton;
+    private Button settingsButton;
 
     @FXML
-    private Button sendMailbutton;
+    private Button newEmailButton;
 
     @FXML
     private TreeView<String> leftTreeView;
@@ -111,7 +115,7 @@ public class FXMLController implements Initializable {
         try {
             this.mainMail = new MainMail(addressField.getText(), passwordField.getText(), leftTreeView);
             mainMail.login();
-
+            topToolBarLoggedIn();
         } catch (AuthenticationFailedException e) {
             userMessageLabel.setText("Auth error : " + e.getMessage());
         } catch (MessagingException e) {
@@ -121,14 +125,18 @@ public class FXMLController implements Initializable {
         }
     }
 
-    public void sendButtonHandler() {
-        System.out.println("sendButtonHandler..");
-        sendMail = new SendMail("test@gmail.com", "Java Test Subject", "Java Test Message");
-        sendMail.send();
+    public void newEmailButtonHandler() {
+        System.out.println("newEmailButtonHandler..");
+        
+    }
+    
+    public void logoutButtonHandler() {
+        System.out.println("logoutButtonHandler..");
+        
     }
 
-    public void getButtonHandler() {
-        System.out.println("getButtonHandler..");
+    public void settingsButtonHandler() {
+        System.out.println("settingsButtonHandler..");
 
     }
 
@@ -172,5 +180,21 @@ public class FXMLController implements Initializable {
                 userMessageLabel.setText(ex.getMessage());
             }
         });
+    }
+
+    private void topToolBarLoggedIn() {
+        userMessageLabel.setText("Remove login buttons");
+        addressLabel.setText(mainMail.getEmailAddress());
+        topToolBar.getItems().remove(addressField);
+        topToolBar.getItems().remove(passwordLabel);
+        topToolBar.getItems().remove(passwordField);
+        topToolBar.getItems().remove(loginButton);
+        topToolBar.getItems().remove(settingsButton);
+        topToolBar.getItems().add(logoutButton);
+        logoutButton.setText("Logout");
+        topToolBar.getItems().add(new Separator());
+        topToolBar.getItems().add(newEmailButton);        
+        topToolBar.getItems().add(new Separator());
+        topToolBar.getItems().add(settingsButton);
     }
 }
