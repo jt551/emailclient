@@ -16,6 +16,7 @@ Create Javafx concurrent Service for fetching folders.
 Create Javafx concurrent Service for login.  
 Write tests and documentation.  
 Settings view with persistence.  
+File attachments?  
   
 ![alt text](https://github.com/jt551/emailclient/blob/main/screenshot.png)  
 ![alt text](https://github.com/jt551/emailclient/blob/main/screenshot2.png)  
