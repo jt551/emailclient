@@ -102,15 +102,26 @@ public class EmailTest {
      */
     @Test
     public void testSetDate() {
-        
+        Date date = new Date(0);
+        email.setDate(date);
+        assertEquals(date, email.getDate());
     }
 
     /**
      * Test of setMessage method, of class Email.
      */
     @Test
-    public void testSetMessage() {
+    public void testSetMessage() throws AddressException, MessagingException {
+        Message testmsg = new MimeMessage(session);
         
+        testmsg.setFrom(new InternetAddress("abc@abc.com"));
+        testmsg.setSentDate(new Date());
+        testmsg.setRecipient(Message.RecipientType.TO, new InternetAddress("abc@abc.com"));        
+        testmsg.setSubject("test");
+        testmsg.setText("test");
+        testmsg.saveChanges();
+        email.setMessage(testmsg);
+        assertEquals("test", email.getMessage().getSubject());
     }
 
     /**
@@ -118,23 +129,18 @@ public class EmailTest {
      */
     @Test
     public void testSetSender() {
-        
+        email.setSender("settest@gmail.com");
+        assertEquals("settest@gmail.com", email.getSender());
     }
 
-    /**
-     * Test of setSize method, of class Email.
-     */
-    @Test
-    public void testSetSize() {
-        
-    }
 
     /**
      * Test of setSubject method, of class Email.
      */
     @Test
     public void testSetSubject() {
-       
+       email.setSubject("settest@gmail.com");
+        assertEquals("settest@gmail.com", email.getSubject());
     }
 
     /**
@@ -142,7 +148,8 @@ public class EmailTest {
      */
     @Test
     public void testSetTo() {
-        
+        email.setTo("settest@gmail.com");
+        assertEquals("settest@gmail.com", email.getTo());
     }
 
     /**

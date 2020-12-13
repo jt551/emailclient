@@ -40,6 +40,8 @@ public class MainMail {
 
     private ObservableList<Message> messages;
 
+    
+
     public MainMail(String username, String password, TreeView treeView) throws IOException {
         this.accountDetailsProvider = new HardCodedAccountDetails();
         this.serverDetailsProvider = new HardCodedServerDetails();
@@ -101,6 +103,11 @@ public class MainMail {
     public String getEmailAddress(){
         return emailAccount.getAddress();
     }
+    
+    public EmailAccount getEmailAccount() {
+        return emailAccount;
+    }
+    
     private void getInboxMessages() throws MessagingException {
         this.messages = FXCollections.observableArrayList();
         try {

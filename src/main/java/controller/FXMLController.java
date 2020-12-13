@@ -11,7 +11,10 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -25,6 +28,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 import model.Email;
@@ -65,7 +69,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private Button loginButton;
-    
+
     @FXML
     private Button logoutButton;
 
@@ -98,6 +102,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private TableColumn<Email, Integer> sizeColumn;
+    private SendFXMLController sendFXMLController;
 
     /**
      * Initializes the controller class.
@@ -107,7 +112,7 @@ public class FXMLController implements Initializable {
         setTableViewValues();
         setTreeHandler();
         this.displayEmail = new DisplayEmail(mainWebView.getEngine(), userMessageLabel);
-        setTableHandler();
+        setTableHandler();        
     }
 
     @FXML
@@ -115,7 +120,9 @@ public class FXMLController implements Initializable {
         try {
             this.mainMail = new MainMail(addressField.getText(), passwordField.getText(), leftTreeView);
             mainMail.login();
-            topToolBarLoggedIn();
+            setTopToolBarToLoggedInStatus();
+            this.sendMail = new SendMail(mainMail.getEmailAccount());
+            this.sendFXMLController = new SendFXMLController(sendMail);
         } catch (AuthenticationFailedException e) {
             userMessageLabel.setText("Auth error : " + e.getMessage());
         } catch (MessagingException e) {
@@ -127,12 +134,21 @@ public class FXMLController implements Initializable {
 
     public void newEmailButtonHandler() {
         System.out.println("newEmailButtonHandler..");
-        
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/sendFXML.fxml"));
+            fxmlLoader.setController(this.sendFXMLController);
+            Parent rootNewEmail = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(rootNewEmail));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
+
     public void logoutButtonHandler() {
         System.out.println("logoutButtonHandler..");
-        
+        setTopToolBarToLoggedOutStatus();
     }
 
     public void settingsButtonHandler() {
@@ -169,20 +185,20 @@ public class FXMLController implements Initializable {
     private void setTableHandler() {
         mainTableView.setOnMouseClicked(e -> {
             Email email = (Email) mainTableView.getSelectionModel().getSelectedItem();
-            
-             try {
+
+            try {
                 if (email != null) {
                     userMessageLabel.setText("Show email in webview");
                     displayEmail.setMessage(email.getMessage());
                     displayEmail.restart();
                 }
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 userMessageLabel.setText(ex.getMessage());
             }
         });
     }
 
-    private void topToolBarLoggedIn() {
+    private void setTopToolBarToLoggedInStatus() {
         userMessageLabel.setText("Remove login buttons");
         addressLabel.setText(mainMail.getEmailAddress());
         topToolBar.getItems().remove(addressField);
@@ -193,8 +209,20 @@ public class FXMLController implements Initializable {
         topToolBar.getItems().add(logoutButton);
         logoutButton.setText("Logout");
         topToolBar.getItems().add(new Separator());
-        topToolBar.getItems().add(newEmailButton);        
+        topToolBar.getItems().add(newEmailButton);
         topToolBar.getItems().add(new Separator());
         topToolBar.getItems().add(settingsButton);
+    }
+
+    private void setTopToolBarToLoggedOutStatus() {
+        for(int i = 0; i<topToolBar.getItems().size(); i++){
+            topToolBar.getItems().remove(i);
+        }
+        topToolBar.getItems().add(addressField);
+        topToolBar.getItems().add(passwordLabel);
+        topToolBar.getItems().add(passwordField);
+        topToolBar.getItems().add(loginButton);
+        topToolBar.getItems().add(settingsButton);
+        
     }
 }

@@ -22,7 +22,7 @@ public class Email {
     private int size;
     private Message message;    
 
-    protected Email(Message message) throws MessagingException {
+    public Email(Message message) throws MessagingException {
         this.sender = message.getFrom()[0].toString();
         this.to = message.getRecipients(Message.RecipientType.TO)[0].toString();
         this.subject = message.getSubject();
@@ -65,10 +65,6 @@ public class Email {
 
     public void setSender(String sender) {
         this.sender = sender;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public void setSubject(String subject) {

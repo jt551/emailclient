@@ -17,15 +17,21 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.HTMLEditor;
 import javafx.stage.Stage;
 import model.SendMail;
+
 /**
  * SendFXML Controller class
  * <p>
- * On user action "SendButton", pass details from new email window to model Send Mail class.
- * 
+ * On user action "SendButton", pass details from new email window to model Send
+ * Mail class.
+ *
  */
 public class SendFXMLController implements Initializable {
-    
+
     SendMail sendMail;
+    
+    public SendFXMLController(SendMail sendMail){
+        this.sendMail = sendMail;
+    }
     @FXML
     private AnchorPane sendMailAnchorPane;
 
@@ -45,18 +51,34 @@ public class SendFXMLController implements Initializable {
     private Button sendButton;
 
     @FXML
+    private Button cancelButton;
+
+    @FXML
     void sendButtonHandler() {
-       Stage stage = (Stage)sendMailAnchorPane.getScene().getWindow();
-       
-       stage.close();
+        if(toTextField.getText().length() > 5){
+        Stage stage = (Stage) sendMailAnchorPane.getScene().getWindow();        
+        sendMail.createEmail(toTextField.getText(), subjectTextField.getText(), htmlEditor.getHtmlText());
+        sendMail.send();
+        stage.close();        
+        }else{
+            userMessageLabel.setText("Type reciver address to text field.");
+        }
+        
     }
-    
+
+    @FXML
+    void cancelButtonHandler() {
+        Stage stage = (Stage) sendMailAnchorPane.getScene().getWindow();
+
+        stage.close();
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

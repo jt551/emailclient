@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<AnchorPane id="AnchorPane" fx:id="sendMailAnchorPane" prefHeight="450.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.SendFXMLController">
+<AnchorPane id="AnchorPane" fx:id="sendMailAnchorPane" prefHeight="450.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/sendfxml.css" />
     </stylesheets>
@@ -15,10 +15,10 @@
       <Label alignment="CENTER_RIGHT" layoutX="71.0" layoutY="23.0" prefHeight="15.0" prefWidth="50.0" text="To :" />
       <Label alignment="CENTER_RIGHT" layoutX="71.0" layoutY="56.0" prefHeight="15.0" prefWidth="50.0" text="Subject :" />
       <TextField fx:id="toTextField" layoutX="147.0" layoutY="19.0" prefHeight="25.0" prefWidth="307.0" AnchorPane.topAnchor="19.0" />
-      <TextField fx:id="toTextField" layoutX="147.0" layoutY="52.0" prefHeight="25.0" prefWidth="307.0" AnchorPane.topAnchor="19.0" />
       <Label fx:id="userMessageLabel" layoutX="147.0" layoutY="86.0" prefHeight="17.0" prefWidth="307.0" />
       <HTMLEditor fx:id="htmlEditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="14.0" layoutY="115.0" prefHeight="304.0" prefWidth="576.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" />
       <TextField fx:id="subjectTextField" layoutX="147.0" layoutY="52.0" prefHeight="25.0" prefWidth="307.0" />
       <Button fx:id="sendButton" layoutX="494.0" layoutY="420.0" mnemonicParsing="false" onAction="#sendButtonHandler" prefHeight="25.0" prefWidth="94.0" text="Send" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="12.0" />
+      <Button fx:id="cancelButton" layoutX="382.0" layoutY="420.0" mnemonicParsing="false" onAction="#cancelButtonHandler" prefHeight="25.0" prefWidth="94.0" text="Cancel" AnchorPane.bottomAnchor="5.0" />
    </children>
 </AnchorPane>

@@ -20,12 +20,13 @@ import static org.junit.Assert.*;
  */
 public class EmailAccountTest {
     EmailAccount emailAccount;
-    public EmailAccountTest() {
-        this.emailAccount = new EmailAccount("test@gmail.com", "pw");
+    public EmailAccountTest() {        
+        
     }
     
     @Before
     public void setUp() {
+        this.emailAccount = new EmailAccount("test@gmail.com", "pw");
     }
     
     @After

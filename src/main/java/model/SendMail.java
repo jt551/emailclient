@@ -5,16 +5,16 @@
  */
 package model;
 
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 /**
  * Class for sending an email.
@@ -28,15 +28,13 @@ public class SendMail {
 
     private Session session;
     
-    private Message message;
+    private MimeMessage message;
     /**
     * SendMail constructor.
     * Requires three parameters from UI.
-    * @param to message recipient from user interface text field.
-    * @param subject message subject or title from user interface text field.
-    * @param messageBody message from user interface text area.
+    * @param Emailaccount emailAccount message recipient from user interface text field.
+    *  
     * 
-    * TODO: move session to send()
     */
     public SendMail(EmailAccount emailAccount) {
         this.emailAccount = emailAccount;
@@ -51,19 +49,15 @@ public class SendMail {
     */
     public void createEmail(String to, String subject, String content) {
         try {
-            Message message = new MimeMessage(session);
+            this.message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emailAccount.getAddress()));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse(to)
+                    to
             );
             message.setSubject(subject);
-            message.setText(content);
-
-            
-            
-            System.out.println("SendEmail.send() complete");
-
+            Multipart multipart = createMultipart(content);
+            message.setContent(multipart);            
         } catch (Exception e) {
             //TODO: add event to logfile            
             e.printStackTrace();
@@ -72,7 +66,12 @@ public class SendMail {
     
     public void send(){
         try {
-            Transport.send(message);            
+            System.out.println("SendMail send() start");
+            Transport transport = session.getTransport();
+            transport.connect();
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+            System.out.println("SendMail send() end");
         } catch (MessagingException ex) {
             ex.printStackTrace();
         }
@@ -83,13 +82,20 @@ public class SendMail {
         this.session = session;
     }
 
-    
-
     public Session getSession() {
         return session;
     }
 
-    
+    private Multipart createMultipart(String content) throws MessagingException {
+        
+        Multipart multipart = new MimeMultipart();
+        BodyPart body = new MimeBodyPart();
+        
+        body.setContent(content, "text/html");
+        multipart.addBodyPart(body);
+        
+        return multipart;
+    }
 
     
 
