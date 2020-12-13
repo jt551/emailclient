@@ -37,47 +37,16 @@ public class MainMailTest {
     public void testPrintMessages() throws Exception {
         
     }
-
-    /**
-     * Test of getAccountDetailsProvider method, of class MainMail.
-     */
-    @Test
-    public void testGetAccountDetailsProvider() {
-        System.out.println("getAccountDetailsProvider");
-        MainMail instance = null;
-        AccountDetailsProvider expResult = null;
-        AccountDetailsProvider result = instance.getAccountDetailsProvider();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getServerDetailsProvider method, of class MainMail.
-     */
-    @Test
-    public void testGetServerDetailsProvider() {
-        System.out.println("getServerDetailsProvider");
-        MainMail instance = null;
-        ServerDetailsProvider expResult = null;
-        ServerDetailsProvider result = instance.getServerDetailsProvider();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getEmailAddress method, of class MainMail.
-     */
+    
     @Test
     public void testGetEmailAddress() {
-        System.out.println("getEmailAddress");
+        /*System.out.println("getEmailAddress");
         MainMail instance = null;
         String expResult = "";
         String result = instance.getEmailAddress();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("The test case is a prototype.");*/
     }
 
     /**
@@ -85,13 +54,13 @@ public class MainMailTest {
      */
     @Test
     public void testGetEmailAccount() {
-        System.out.println("getEmailAccount");
+        /*System.out.println("getEmailAccount");
         MainMail instance = null;
         EmailAccount expResult = null;
         EmailAccount result = instance.getEmailAccount();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("The test case is a prototype.");*/
     }
     
 }
