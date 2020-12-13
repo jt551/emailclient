@@ -25,7 +25,7 @@ import model.SendMail;
  * Mail class.
  *
  */
-public class SendFXMLController implements Initializable {
+public class SendFXMLController{
 
     SendMail sendMail;
     
@@ -53,6 +53,10 @@ public class SendFXMLController implements Initializable {
     @FXML
     private Button cancelButton;
 
+    public Label getUserMessageLabel() {
+        return userMessageLabel;
+    }
+    
     @FXML
     void sendButtonHandler() {
         if(toTextField.getText().length() > 5){
@@ -72,13 +76,4 @@ public class SendFXMLController implements Initializable {
 
         stage.close();
     }
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-
 }
