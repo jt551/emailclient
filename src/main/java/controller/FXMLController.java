@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -31,6 +32,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
 import model.Email;
 import model.EmailFolderInTree;
 
@@ -146,9 +148,16 @@ public class FXMLController implements Initializable {
         }
     }
 
-    public void logoutButtonHandler() {
-        System.out.println("logoutButtonHandler..");
-        setTopToolBarToLoggedOutStatus();
+    public void logoutButtonHandler() throws NoSuchProviderException, MessagingException, IOException {
+        mainMail.getEmailAccount().getStore().close();
+        Stage stage = (Stage) rootAnchorPane.getScene().getWindow();
+        stage.close();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainFXML.fxml"));
+            
+            Scene scene = new Scene(root);
+            
+            stage.setScene(scene);
+            stage.show();
     }
 
     public void settingsButtonHandler() {
@@ -208,16 +217,19 @@ public class FXMLController implements Initializable {
         topToolBar.getItems().remove(settingsButton);
         topToolBar.getItems().add(logoutButton);
         logoutButton.setText("Logout");
-        topToolBar.getItems().add(new Separator());
+        //topToolBar.getItems().add(new Separator());
         topToolBar.getItems().add(newEmailButton);
-        topToolBar.getItems().add(new Separator());
+        //topToolBar.getItems().add(new Separator());
         topToolBar.getItems().add(settingsButton);
     }
 
     private void setTopToolBarToLoggedOutStatus() {
-        for(int i = 0; i<topToolBar.getItems().size(); i++){
+        /*for(int i = 0; i<topToolBar.getItems().size(); i++){
             topToolBar.getItems().remove(i);
-        }
+        }*/
+        topToolBar.getItems().clear();
+        addressLabel.setText("Address");
+        topToolBar.getItems().add(addressLabel);
         topToolBar.getItems().add(addressField);
         topToolBar.getItems().add(passwordLabel);
         topToolBar.getItems().add(passwordField);
