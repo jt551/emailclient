@@ -78,8 +78,15 @@ public class SendMail {
     }
     
     
-    public void setSession(Session session) {
+    /*public void setSession(Session session) {
         this.session = session;
+    }*/
+    public String getAddress(){
+        return emailAccount.getAddress();
+    }
+
+    public MimeMessage getMessage() {
+        return message;
     }
 
     public Session getSession() {

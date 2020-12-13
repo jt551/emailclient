@@ -142,19 +142,8 @@ public class MainMail {
         this.getFolders = new GetFolders(emailAccount.getStore());
         //test use only delete when not needed 
         this.inbox = getFolders.getInboxFolder();
-
-        //Set folders for ui
-        //TreeItem treeItem = new TreeItem(emailAccount.getAddress());
-        //treeItem.setExpanded(true);
-        //treeItem.getChildren().add("INBOX");
-        //this.displayFolders.setNewPrimaryFolder(emailAccount.getAddress());
-        //this.displayFolders.addFolderToTree(inbox.getName());
-        //Get messages in folders
-        
-        //
+       
         getFolders.getAllFolders(emailAccount.getRootFolder());
-        //Folder[] folders = getFolders.getAllFoldersAsList();
-        //addAllFoldersWithSubFoldersToTree(folders, emailAccount.getRootFolder());
         
         this.displayFolders.addFolderToTree(emailAccount.getRootFolder());
         //

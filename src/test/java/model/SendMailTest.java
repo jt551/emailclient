@@ -7,6 +7,8 @@ package model;
 
 import model.SendMail;
 import java.util.Properties;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 import model.HardCodedServerDetails;
 import model.ServerDetailsProvider;
 import org.junit.After;
@@ -22,14 +24,20 @@ import static org.junit.Assert.*;
  */
 public class SendMailTest {
 
-    SendMail sendMail;
+    private EmailAccount emailAccount;
+
+    private Session session;
+    
+    private MimeMessage message;
+    
+    private SendMail sendMail;
 
     public SendMailTest() {
     }
 
     @Before
     public void setUp() {
-        
+        emailAccount = new EmailAccount("account@gmail.com", "pw");
     }
 
     @After
@@ -38,11 +46,10 @@ public class SendMailTest {
 
     @Test
     public void testConstructorMethod() {
-
-             
+        this.sendMail = new SendMail(emailAccount);
+        assertEquals("account@gmail.com", sendMail.getAddress());
     }
     
     
 }
-// TODO review the generated test code and remove the default call to fail.
-//fail("The test case is a prototype.");
+
