@@ -26,6 +26,7 @@ import ui.DisplayFolders;
 public class MainMail {
 
     private EmailAccount emailAccount;
+    private Database database;
     private LoginToMailServer loginToMailServer;
     private GetFolders getFolders;
     private DisplayFolders displayFolders;
@@ -42,12 +43,13 @@ public class MainMail {
 
     
 
-    public MainMail(String username, String password, TreeView treeView) throws IOException {
+    public MainMail(String username, String password, TreeView treeView, Database database) throws IOException {
         this.accountDetailsProvider = new HardCodedAccountDetails();
         this.serverDetailsProvider = new HardCodedServerDetails();
-        this.emailAccount = new EmailAccount(username, password);
+        this.database = database;
+        this.emailAccount = new EmailAccount(username, password, this.database);
         this.displayFolders = new DisplayFolders(treeView);
-        //this.fxmlController = getfxmlController();
+        
     }
 
     public void login() throws MessagingException {

@@ -73,7 +73,6 @@ public class SendFXMLController{
     @FXML
     void cancelButtonHandler() {
         Stage stage = (Stage) sendMailAnchorPane.getScene().getWindow();
-
         stage.close();
     }
 }

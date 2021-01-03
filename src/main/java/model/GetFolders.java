@@ -36,7 +36,8 @@ public class GetFolders {
         for (Folder folder : folders) {
             EmailFolderInTree<String> treeFolder = new EmailFolderInTree<String>(folder.getName());
             rootFolder.getChildren().add(treeFolder);
-
+            
+            // Check if folder has another folders inside
             if (folder.getType() == Folder.HOLDS_FOLDERS) {
                 Folder[] subFoldersAsList = folder.list();
                 // Recursive call for subfolders

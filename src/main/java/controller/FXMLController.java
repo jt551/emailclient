@@ -33,6 +33,7 @@ import javafx.stage.Stage;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
+import model.Database;
 import model.Email;
 import model.EmailFolderInTree;
 
@@ -50,7 +51,12 @@ public class FXMLController implements Initializable {
     private SendMail sendMail;
     private MainMail mainMail;
     private DisplayEmail displayEmail;
-
+    private Database database;
+    
+    
+    private SendFXMLController sendFXMLController;
+    private SettingsFXMLController settingsFXMLController;
+    
     @FXML
     private AnchorPane rootAnchorPane;
 
@@ -104,7 +110,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private TableColumn<Email, Integer> sizeColumn;
-    private SendFXMLController sendFXMLController;
+    
 
     /**
      * Initializes the controller class.
@@ -114,13 +120,17 @@ public class FXMLController implements Initializable {
         setTableViewValues();
         setTreeHandler();
         this.displayEmail = new DisplayEmail(mainWebView.getEngine(), userMessageLabel);
-        setTableHandler();        
+        setTableHandler();
+        this.database = new Database(userMessageLabel);
+        database.connect();
+        database.init();
+        settingsFXMLController = new SettingsFXMLController(database);
     }
 
     @FXML
     void loginButtonHandler() {
         try {
-            this.mainMail = new MainMail(addressField.getText(), passwordField.getText(), leftTreeView);
+            this.mainMail = new MainMail(addressField.getText(), passwordField.getText(), leftTreeView, this.database);
             mainMail.login();
             setTopToolBarToLoggedInStatus();
             this.sendMail = new SendMail(mainMail.getEmailAccount());
@@ -162,7 +172,16 @@ public class FXMLController implements Initializable {
 
     public void settingsButtonHandler() {
         System.out.println("settingsButtonHandler..");
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/settingsFXML.fxml"));
+            fxmlLoader.setController(this.settingsFXMLController);
+            Parent rootSettings = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(rootSettings));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public TreeView<String> getLeftTreeView() {
