@@ -5,16 +5,10 @@
  */
 package model;
 
-import model.SendMail;
-import java.util.Properties;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
-import model.HardCodedServerDetails;
-import model.ServerDetailsProvider;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -38,6 +32,7 @@ public class SendMailTest {
 
     @Before
     public void setUp() {
+        database = new Database();
         emailAccount = new EmailAccount("account@gmail.com", "pw", database);
     }
 

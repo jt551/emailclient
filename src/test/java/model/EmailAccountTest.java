@@ -27,6 +27,7 @@ public class EmailAccountTest {
     
     @Before
     public void setUp() {
+        database = new Database();
         this.emailAccount = new EmailAccount("test@gmail.com", "pw", database);
     }
     
