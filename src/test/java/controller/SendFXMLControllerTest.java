@@ -8,6 +8,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
+import model.Database;
 import model.EmailAccount;
 import model.SendMail;
 import org.junit.Before;
@@ -22,13 +23,13 @@ public class SendFXMLControllerTest {
     EmailAccount emailAccount;
     SendMail sendMail;
     SendFXMLController sendFXMLController;
-    
+    Database database;
     public SendFXMLControllerTest() {
     }
     
     @Before
     public void setUp() {
-        emailAccount = new EmailAccount("testuser@test.com", "1234");
+        emailAccount = new EmailAccount("testuser@test.com", "1234", database);
         this.sendMail = new SendMail(emailAccount);
         this.sendFXMLController = new SendFXMLController(sendMail);
     }

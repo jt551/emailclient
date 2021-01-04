@@ -85,12 +85,12 @@ public class SettingsFXMLController implements Initializable {
     private void populateTextFields() {
         Properties p = database.getPropertiesByName("gmail");
         addressTextField.setText(p.getProperty("emailaddress"));
-        imapServerTextField.setText(p.getProperty("imaphost"));
-        imapProtocolTextField.setText(p.getProperty("imapprotocol"));
-        mailProtocolTextField.setText(p.getProperty("mailprotocol"));
-        mailServerTextField.setText(p.getProperty("mailhost"));
-        mailAuthTextField.setText(p.getProperty("mailauth"));
-        outgoingHostTextField.setText(p.getProperty("outgoinghost"));
+        imapServerTextField.setText(p.getProperty("imapHost"));
+        imapProtocolTextField.setText(p.getProperty("mail.store.protocol"));
+        mailProtocolTextField.setText(p.getProperty("mail.transport.protocol"));
+        mailServerTextField.setText(p.getProperty("mail.smtps.host"));
+        mailAuthTextField.setText(p.getProperty("mail.smtps.auth"));
+        outgoingHostTextField.setText(p.getProperty("outgoingHost"));
         nameTextField.setText(p.getProperty("name"));
     }
 }

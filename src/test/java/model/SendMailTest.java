@@ -25,7 +25,8 @@ import static org.junit.Assert.*;
 public class SendMailTest {
 
     private EmailAccount emailAccount;
-
+    private Database database;
+    
     private Session session;
     
     private MimeMessage message;
@@ -37,7 +38,7 @@ public class SendMailTest {
 
     @Before
     public void setUp() {
-        emailAccount = new EmailAccount("account@gmail.com", "pw");
+        emailAccount = new EmailAccount("account@gmail.com", "pw", database);
     }
 
     @After

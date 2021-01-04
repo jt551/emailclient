@@ -22,13 +22,13 @@ public class SendMailIT {
     private Session session;    
     private MimeMessage message;    
     private SendMail sendMail;
-    
+    private Database database;
     public SendMailIT() {
     }
     
     @Before
     public void setUp() {
-        this.emailAccount = new EmailAccount("account@gmail.com", "pw");
+        this.emailAccount = new EmailAccount("account@gmail.com", "pw", database);
         this.session = emailAccount.getSession();
         this.sendMail = new SendMail(emailAccount);
     }

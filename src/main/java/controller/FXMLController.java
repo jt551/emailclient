@@ -18,13 +18,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.Separator;
-
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -52,11 +49,10 @@ public class FXMLController implements Initializable {
     private MainMail mainMail;
     private DisplayEmail displayEmail;
     private Database database;
-    
-    
+
     private SendFXMLController sendFXMLController;
     private SettingsFXMLController settingsFXMLController;
-    
+
     @FXML
     private AnchorPane rootAnchorPane;
 
@@ -110,7 +106,6 @@ public class FXMLController implements Initializable {
 
     @FXML
     private TableColumn<Email, Integer> sizeColumn;
-    
 
     /**
      * Initializes the controller class.
@@ -124,7 +119,10 @@ public class FXMLController implements Initializable {
         this.database = new Database(userMessageLabel);
         database.connect();
         database.init();
+        addressField.setFocusTraversable(false);
         settingsFXMLController = new SettingsFXMLController(database);
+        addressField.setText(database.getEmailAddessByName("gmail"));
+        passwordField.requestFocus();
     }
 
     @FXML
@@ -145,7 +143,6 @@ public class FXMLController implements Initializable {
     }
 
     public void newEmailButtonHandler() {
-        System.out.println("newEmailButtonHandler..");
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/sendFXML.fxml"));
             fxmlLoader.setController(this.sendFXMLController);
@@ -153,25 +150,25 @@ public class FXMLController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(rootNewEmail));
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            userMessageLabel.setText("Error while opening a new window : " + e.getMessage());
         }
     }
 
     public void logoutButtonHandler() throws NoSuchProviderException, MessagingException, IOException {
         mainMail.getEmailAccount().getStore().close();
+        database.close();
         Stage stage = (Stage) rootAnchorPane.getScene().getWindow();
         stage.close();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainFXML.fxml"));
-            
-            Scene scene = new Scene(root);
-            
-            stage.setScene(scene);
-            stage.show();
+
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void settingsButtonHandler() {
-        System.out.println("settingsButtonHandler..");
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/settingsFXML.fxml"));
             fxmlLoader.setController(this.settingsFXMLController);
@@ -179,8 +176,8 @@ public class FXMLController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(rootSettings));
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            userMessageLabel.setText("Error while opening a new window : " + e.getMessage());
         }
     }
 
@@ -213,7 +210,6 @@ public class FXMLController implements Initializable {
     private void setTableHandler() {
         mainTableView.setOnMouseClicked(e -> {
             Email email = (Email) mainTableView.getSelectionModel().getSelectedItem();
-
             try {
                 if (email != null) {
                     userMessageLabel.setText("Show email in webview");
@@ -236,16 +232,10 @@ public class FXMLController implements Initializable {
         topToolBar.getItems().remove(settingsButton);
         topToolBar.getItems().add(logoutButton);
         logoutButton.setText("Logout");
-        //topToolBar.getItems().add(new Separator());
         topToolBar.getItems().add(newEmailButton);
-        //topToolBar.getItems().add(new Separator());
-        topToolBar.getItems().add(settingsButton);
     }
 
-    private void setTopToolBarToLoggedOutStatus() {
-        /*for(int i = 0; i<topToolBar.getItems().size(); i++){
-            topToolBar.getItems().remove(i);
-        }*/
+    /*private void setTopToolBarToLoggedOutStatus() {
         topToolBar.getItems().clear();
         addressLabel.setText("Address");
         topToolBar.getItems().add(addressLabel);
@@ -254,6 +244,6 @@ public class FXMLController implements Initializable {
         topToolBar.getItems().add(passwordField);
         topToolBar.getItems().add(loginButton);
         topToolBar.getItems().add(settingsButton);
-        
-    }
+
+    }*/
 }
