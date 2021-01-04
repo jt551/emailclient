@@ -34,16 +34,7 @@ public class EmailAccount {
         this.serverProperties = new Properties();
         this.rootFolder = new EmailFolderInTree(address);
         this.database = database;
-        this.setServerProperties(this.database.getPropertiesByName("gmail"));
-        /*serverProperties.put("imapHost", "imap.gmail.com");
-        serverProperties.put("mail.store.protocol", "imaps");
-
-        serverProperties.put("mail.transport.protocol", "smtps");
-        serverProperties.put("mail.smtps.host", "smtp.gmail.com");
-        serverProperties.put("mail.smtps.auth", "true");
-        serverProperties.put("outgoingHost", "smtp.gmail.com");
-        */
-        
+        this.setServerProperties(this.database.getPropertiesByName("gmail"));                
     }
 
     public String getAddress() {

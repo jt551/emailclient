@@ -5,6 +5,10 @@
  */
 package model;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Authenticator;
 import javax.mail.MessagingException;
@@ -17,12 +21,20 @@ import javax.mail.Store;
  *
  * @author juhat
  */
-public class LoginToMailServer {
+public class LoginToMailServer extends Service {
 
     EmailAccount emailAccount;
-
+    GetFolders getFolders;
+    
     public LoginToMailServer(EmailAccount emailAccount) {
         this.emailAccount = emailAccount;
+        
+        setOnSucceeded(s -> {
+            try {
+                getFolders.getAllFolders(emailAccount.getRootFolder());
+            } catch (MessagingException ex) {
+            }
+        });
 
     }
 
@@ -42,10 +54,7 @@ public class LoginToMailServer {
             store.connect(emailAccount.getServerProperties().getProperty("imapHost"), emailAccount.getAddress(), emailAccount.getPassword());
             emailAccount.setStore(store);
             emailAccount.setSession(session);
-            System.out.println("---------------------");
-            System.out.println("----  Logged in  ----");
-            System.out.println("---------------------");
-            
+            this.getFolders = new GetFolders(emailAccount.getStore());
         } catch (NoSuchProviderException e) {
             e.printStackTrace();
         } catch (AuthenticationFailedException e) {
@@ -55,6 +64,22 @@ public class LoginToMailServer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected Task createTask() {
+        return new Task() {
+            @Override
+            protected Object call() throws Exception {
+                try {
+                    login();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+        };
     }
 
 }

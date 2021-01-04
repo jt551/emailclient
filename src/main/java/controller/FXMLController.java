@@ -234,16 +234,4 @@ public class FXMLController implements Initializable {
         logoutButton.setText("Logout");
         topToolBar.getItems().add(newEmailButton);
     }
-
-    /*private void setTopToolBarToLoggedOutStatus() {
-        topToolBar.getItems().clear();
-        addressLabel.setText("Address");
-        topToolBar.getItems().add(addressLabel);
-        topToolBar.getItems().add(addressField);
-        topToolBar.getItems().add(passwordLabel);
-        topToolBar.getItems().add(passwordField);
-        topToolBar.getItems().add(loginButton);
-        topToolBar.getItems().add(settingsButton);
-
-    }*/
 }
