@@ -7,8 +7,10 @@ package model;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.control.Label;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.Authenticator;
 import javax.mail.MessagingException;
@@ -25,41 +27,55 @@ public class LoginToMailServer extends Service {
 
     EmailAccount emailAccount;
     GetFolders getFolders;
-    
-    public LoginToMailServer(EmailAccount emailAccount) {
-        this.emailAccount = emailAccount;
-        
-        setOnSucceeded(s -> {
-            getFolders.start();
-        });
+    private Label userMessageLabel;
 
+    public LoginToMailServer(EmailAccount emailAccount, Label userMessageLabel) {
+        this.emailAccount = emailAccount;
+        this.userMessageLabel = userMessageLabel;
+
+        setOnSucceeded(s -> {
+            if (getFolders != null) {
+                getFolders.start();
+            }
+        });
+        setOnFailed(s -> {
+            Platform.runLater(
+                    () -> {
+                        userMessageLabel.setText("Login failed.");
+                    }
+            );
+        });
     }
 
     public void login() {
-        
+
         Authenticator authenticator = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(emailAccount.getAddress(), emailAccount.getPassword());
             }
         };
-           
+
         try {
             Session session = Session.getInstance(emailAccount.getServerProperties(), authenticator);
             Store store = session.getStore("imaps");
-            
+
             store.connect(emailAccount.getServerProperties().getProperty("imapHost"), emailAccount.getAddress(), emailAccount.getPassword());
             emailAccount.setStore(store);
             emailAccount.setSession(session);
             this.getFolders = new GetFolders(emailAccount.getStore(), emailAccount.getRootFolder());
-        } catch (NoSuchProviderException e) {
-            e.printStackTrace();
-        } catch (AuthenticationFailedException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NoSuchProviderException | AuthenticationFailedException e) {
+            Platform.runLater(
+                    () -> {
+                        userMessageLabel.setText(e.getMessage());
+                    }
+            );
+        } catch (MessagingException ex) {
+            Platform.runLater(
+                    () -> {
+                        userMessageLabel.setText(ex.getMessage());
+                    }
+            );
         }
     }
 
@@ -67,12 +83,8 @@ public class LoginToMailServer extends Service {
     protected Task createTask() {
         return new Task() {
             @Override
-            protected Object call() throws Exception {
-                try {
-                    login();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            protected Object call() throws MessagingException {
+                login();
                 return null;
             }
 

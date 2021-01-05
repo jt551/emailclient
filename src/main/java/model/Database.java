@@ -63,15 +63,6 @@ public class Database {
                 p.setString(7, "true");
                 p.setString(8, "smtp.gmail.com");
                 p.executeUpdate();
-
-                p = conn.prepareStatement("SELECT id, name FROM EmailSettings WHERE name=?");
-                p.setString(1, "gmail");
-                r = p.executeQuery();
-                while (r.next()) {
-                    System.out.println("gmailindbtest");
-                    System.out.println(r.getInt("id"));
-                    System.out.println(r.getString("name"));
-                }
             }
 
         } catch (SQLException e) {
@@ -173,6 +164,8 @@ public class Database {
             conn.close();
         } catch (SQLException ex) {
             this.userMessageLabel.setText(ex.getMessage());
+        } catch (Exception e) {
+            this.userMessageLabel.setText(e.getMessage());
         }
     }
 

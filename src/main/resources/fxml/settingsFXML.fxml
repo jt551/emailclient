@@ -7,14 +7,14 @@
 
 <AnchorPane id="settingsAnchorPane" prefHeight="364.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="58.0" prefHeight="17.0" prefWidth="91.0" text="Email address" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="58.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="5.0" layoutY="58.0" prefHeight="17.0" prefWidth="118.0" text="Email address" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="58.0" />
       <Label alignment="CENTER" layoutX="123.0" layoutY="26.0" prefHeight="17.0" prefWidth="98.0" text="Settings" AnchorPane.topAnchor="30.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="89.0" prefHeight="17.0" prefWidth="91.0" text="Imap server" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="89.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="121.0" prefHeight="17.0" prefWidth="91.0" text="Imap protocol" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="121.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="152.0" prefHeight="17.0" prefWidth="91.0" text="Mail protocol" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="152.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="183.0" prefHeight="17.0" prefWidth="91.0" text="Mail server" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="183.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="214.0" prefHeight="17.0" prefWidth="91.0" text="Mail auth" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="214.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="246.0" prefHeight="17.0" prefWidth="91.0" text="Outgoing host" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="246.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="5.0" layoutY="89.0" prefHeight="17.0" prefWidth="118.0" text="Imap server address" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="89.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="5.0" layoutY="121.0" prefHeight="17.0" prefWidth="118.0" text="mail.store.protocol" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="121.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="5.0" layoutY="152.0" prefHeight="17.0" prefWidth="125.0" text="mail.transport.protocol" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="152.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="5.0" layoutY="183.0" prefHeight="17.0" prefWidth="118.0" text="mail.smtps.host" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="183.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="5.0" layoutY="214.0" prefHeight="17.0" prefWidth="118.0" text="mail.smtps.auth" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="214.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="5.0" layoutY="246.0" prefHeight="17.0" prefWidth="118.0" text="Outgoing host" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="246.0" />
       <Button fx:id="saveButton" layoutX="275.0" layoutY="220.0" mnemonicParsing="false" onAction="#saveButtonHandler" prefWidth="52.0" text="Save " AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="13.0" />
       <Button fx:id="cancelButton" layoutX="210.0" layoutY="220.0" mnemonicParsing="false" onAction="#cancelButtonHandler" text="Cancel" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="73.0" />
       <Button fx:id="resetButton" layoutX="145.0" layoutY="220.0" mnemonicParsing="false" onAction="#resetButtonHandler" text="Reset" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="133.0" />
@@ -26,6 +26,6 @@
       <TextField fx:id="mailAuthTextField" layoutX="146.0" layoutY="210.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
       <TextField fx:id="outgoingHostTextField" layoutX="146.0" layoutY="242.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
       <TextField fx:id="nameTextField" layoutX="146.0" layoutY="273.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="32.0" layoutY="277.0" prefHeight="17.0" prefWidth="91.0" text="Save as" />
+      <Label alignment="CENTER_RIGHT" layoutX="5.0" layoutY="277.0" prefHeight="17.0" prefWidth="118.0" text="Save as" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="277.0" />
    </children>
 </AnchorPane>

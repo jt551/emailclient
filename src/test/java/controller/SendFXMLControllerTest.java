@@ -23,14 +23,15 @@ public class SendFXMLControllerTest {
     EmailAccount emailAccount;
     SendMail sendMail;
     SendFXMLController sendFXMLController;
-    Database database;
-    Label label;
+    Database database;    
+    private Label label;
     public SendFXMLControllerTest() {
     }
     
     @Before
     public void setUp() {
-        database = new Database();
+        
+        database = new Database(label);
         emailAccount = new EmailAccount("testuser@test.com", "1234", database);
         this.sendMail = new SendMail(emailAccount);
         this.sendFXMLController = new SendFXMLController(sendMail);

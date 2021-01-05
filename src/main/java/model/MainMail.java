@@ -6,7 +6,9 @@
 package model;
 
 import java.io.IOException;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeView;
+import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 import ui.DisplayFolders;
 
@@ -20,21 +22,21 @@ public class MainMail {
     private Database database;
     private LoginToMailServer loginToMailServer;    
     private DisplayFolders displayFolders;    
-
+    private Label userMessageLabel;
     private AccountDetailsProvider accountDetailsProvider;
     private ServerDetailsProvider serverDetailsProvider;
 
-    public MainMail(String username, String password, TreeView treeView, Database database) throws IOException {
+    public MainMail(String username, String password, TreeView treeView, Database database, Label userMessageLabel) throws IOException {
         this.accountDetailsProvider = new HardCodedAccountDetails();
         this.serverDetailsProvider = new HardCodedServerDetails();
         this.database = database;
         this.emailAccount = new EmailAccount(username, password, this.database);
         this.displayFolders = new DisplayFolders(treeView);
-        
+        this.userMessageLabel = userMessageLabel;
     }
 
-    public void login() throws MessagingException {
-        this.loginToMailServer = new LoginToMailServer(emailAccount);
+    public void login() throws MessagingException, AuthenticationFailedException {
+        this.loginToMailServer = new LoginToMailServer(emailAccount, userMessageLabel);
         loginToMailServer.start();
         addRootFolderToUI();
     }

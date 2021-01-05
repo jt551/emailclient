@@ -128,7 +128,7 @@ public class FXMLController implements Initializable {
     @FXML
     void loginButtonHandler() {
         try {
-            this.mainMail = new MainMail(addressField.getText(), passwordField.getText(), leftTreeView, this.database);
+            this.mainMail = new MainMail(addressField.getText(), passwordField.getText(), leftTreeView, this.database, this.userMessageLabel);
             mainMail.login();
             setTopToolBarToLoggedInStatus();
             this.sendMail = new SendMail(mainMail.getEmailAccount());
@@ -156,7 +156,9 @@ public class FXMLController implements Initializable {
     }
 
     public void logoutButtonHandler() throws NoSuchProviderException, MessagingException, IOException {
-        mainMail.getEmailAccount().getStore().close();
+        if (mainMail.getEmailAccount().getStore() != null) {
+            mainMail.getEmailAccount().getStore().close();
+        }
         database.close();
         Stage stage = (Stage) rootAnchorPane.getScene().getWindow();
         stage.close();
