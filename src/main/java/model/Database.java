@@ -15,6 +15,7 @@ public class Database {
     private Label userMessageLabel;
 
     public Database() {
+
     }
 
     public Database(Label userMessageLabel) {
@@ -95,9 +96,11 @@ public class Database {
             }
             close();
         } catch (SQLException e) {
-            this.userMessageLabel.setText(e.getMessage());
+            if (this.userMessageLabel != null) {
+                this.userMessageLabel.setText(e.getMessage());
+            }
         }
-        
+
         return properties;
     }
 
@@ -116,7 +119,9 @@ public class Database {
             p.setString(8, name);
             p.executeUpdate();
             close();
-            this.userMessageLabel.setText("Settings saved.");
+            if (this.userMessageLabel != null) {
+                this.userMessageLabel.setText("Settings saved.");
+            }
         } catch (SQLException e) {
             this.userMessageLabel.setText(e.getMessage());
         }
@@ -141,7 +146,7 @@ public class Database {
 
     public void resetProperties() {
         try {
-            connect();            
+            connect();
             PreparedStatement p = conn.prepareStatement("UPDATE EmailSettings SET imaphost = ? , imapprotocol = ?, mailprotocol = ?, mailhost = ? , mailauth = ? , outgoinghost = ? "
                     + " WHERE name = ?");
             p.setString(1, "imap.gmail.com");
@@ -153,7 +158,9 @@ public class Database {
             p.setString(7, "gmail");
             p.executeUpdate();
             close();
-            this.userMessageLabel.setText("Settings reset.");
+            if (this.userMessageLabel != null) {
+                this.userMessageLabel.setText("Settings reset.");
+            }
         } catch (SQLException e) {
             this.userMessageLabel.setText(e.getMessage());
         }
@@ -167,6 +174,18 @@ public class Database {
         } catch (Exception e) {
             this.userMessageLabel.setText(e.getMessage());
         }
+    }
+
+    public String getDatabaseName() {
+        return databaseName;
+    }
+
+    public Label getUserMessageLabel() {
+        return userMessageLabel;
+    }
+
+    public Connection getConn() {
+        return conn;
     }
 
 }
