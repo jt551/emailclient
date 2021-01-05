@@ -30,10 +30,7 @@ public class LoginToMailServer extends Service {
         this.emailAccount = emailAccount;
         
         setOnSucceeded(s -> {
-            try {
-                getFolders.getAllFolders(emailAccount.getRootFolder());
-            } catch (MessagingException ex) {
-            }
+            getFolders.start();
         });
 
     }
@@ -54,7 +51,7 @@ public class LoginToMailServer extends Service {
             store.connect(emailAccount.getServerProperties().getProperty("imapHost"), emailAccount.getAddress(), emailAccount.getPassword());
             emailAccount.setStore(store);
             emailAccount.setSession(session);
-            this.getFolders = new GetFolders(emailAccount.getStore());
+            this.getFolders = new GetFolders(emailAccount.getStore(), emailAccount.getRootFolder());
         } catch (NoSuchProviderException e) {
             e.printStackTrace();
         } catch (AuthenticationFailedException e) {

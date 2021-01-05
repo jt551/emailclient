@@ -89,17 +89,4 @@ public class MainMailIT {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of printMessages method, of class MainMail.
-     */
-    @Test
-    public void testPrintMessages() throws Exception {
-        System.out.println("printMessages");
-        MainMail instance = null;
-        instance.printMessages();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

@@ -6,9 +6,7 @@
 package model;
 
 import java.io.IOException;
-import javafx.collections.ObservableList;
 import javafx.scene.control.TreeView;
-import javax.mail.Message;
 import javax.mail.MessagingException;
 import ui.DisplayFolders;
 
@@ -26,9 +24,6 @@ public class MainMail {
     private AccountDetailsProvider accountDetailsProvider;
     private ServerDetailsProvider serverDetailsProvider;
 
-    private ObservableList<Message> messages;
-
-
     public MainMail(String username, String password, TreeView treeView, Database database) throws IOException {
         this.accountDetailsProvider = new HardCodedAccountDetails();
         this.serverDetailsProvider = new HardCodedServerDetails();
@@ -41,7 +36,7 @@ public class MainMail {
     public void login() throws MessagingException {
         this.loginToMailServer = new LoginToMailServer(emailAccount);
         loginToMailServer.start();
-        getFolders();
+        addRootFolderToUI();
     }
 
     public AccountDetailsProvider getAccountDetailsProvider() {
@@ -61,20 +56,7 @@ public class MainMail {
         return emailAccount;
     }
 
-    public void printMessages() throws MessagingException {
-        if (messages.size() > 0) {
-            for (Message msg : messages) {
-                System.out.println("");
-                System.out.println("-- Mail --");
-                System.out.println(msg.getFrom()[0].toString());
-                System.out.println(msg.getSubject());
-                System.out.println(msg.getSentDate());
-                System.out.println("----------");
-            }
-        }
-    }
-
-    private void getFolders() throws MessagingException {
+    private void addRootFolderToUI() throws MessagingException {
         this.displayFolders.addFolderToTree(emailAccount.getRootFolder());       
     }
 }

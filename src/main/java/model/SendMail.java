@@ -30,8 +30,7 @@ public class SendMail {
     
     private MimeMessage message;
     /**
-    * SendMail constructor.
-    * Requires three parameters from UI.
+    * SendMail constructor.    
     * @param Emailaccount emailAccount message recipient from user interface text field.
     *  
     * 
@@ -49,6 +48,7 @@ public class SendMail {
     */
     public void createEmail(String to, String subject, String content) {
         try {
+            this.session = emailAccount.getSession();
             this.message = new MimeMessage(session);
             message.setFrom(new InternetAddress(emailAccount.getAddress()));
             message.setRecipients(
@@ -66,21 +66,18 @@ public class SendMail {
     
     public void send(){
         try {
-            System.out.println("SendMail send() start");
+            this.session = emailAccount.getSession();           
             Transport transport = session.getTransport();
             transport.connect();
             transport.sendMessage(message, message.getAllRecipients());
-            transport.close();
-            System.out.println("SendMail send() end");
+            transport.close();            
         } catch (MessagingException ex) {
             ex.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
     
-    
-    /*public void setSession(Session session) {
-        this.session = session;
-    }*/
     public String getAddress(){
         return emailAccount.getAddress();
     }
@@ -103,9 +100,5 @@ public class SendMail {
         
         return multipart;
     }
-
-    
-
-    
     
 }

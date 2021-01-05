@@ -5,6 +5,8 @@
  */
 package model;
 
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javax.mail.Folder;
 import javax.mail.MessagingException;
 import javax.mail.Store;
@@ -13,12 +15,14 @@ import javax.mail.Store;
  *
  * @author juhat
  */
-public class GetFolders {
+public class GetFolders extends Service {
 
     private Store store;
-
-    public GetFolders(Store store) {
+    private EmailFolderInTree rootFolder;
+    
+    public GetFolders(Store store, EmailFolderInTree rootFolder) {
         this.store = store;
+        this.rootFolder = rootFolder;
     }
 
     public Folder[] getAllFoldersAsList() throws MessagingException {
@@ -26,7 +30,7 @@ public class GetFolders {
         return folders;
     }
 
-    public void getAllFolders(EmailFolderInTree rootFolder) throws MessagingException {
+    public void getAllFolders() throws MessagingException {
         //
         Folder[] folders = store.getDefaultFolder().list();
         getAllFoldersToTreeItem(folders, rootFolder);
@@ -58,7 +62,23 @@ public class GetFolders {
             }
         }
     }
+    
+    @Override
+    protected Task createTask() {
+        return new Task() {
+            @Override
+            protected Object call() throws Exception {
+                try {
+                    getAllFolders();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
 
+        };
+    }
+    /*
     public Folder getInboxFolder() {
         try {
             return store.getFolder("inbox");
@@ -66,5 +86,5 @@ public class GetFolders {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 }
