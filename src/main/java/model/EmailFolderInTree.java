@@ -37,5 +37,7 @@ public class EmailFolderInTree<String> extends TreeItem{
         return emailsInFolder;
     }
     
-    
+    public String getName(){
+        return name;
+    }
 }

@@ -6,6 +6,7 @@
 package model;
 
 import java.util.Properties;
+import javax.mail.Folder;
 import javax.mail.Store;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -101,7 +102,8 @@ public class EmailAccountTest {
      */
     @Test
     public void testGetStore() {
-        
+        Store store = emailAccount.getStore();
+        assertNull(store);
     }
 
     /**
@@ -117,7 +119,7 @@ public class EmailAccountTest {
      */
     @Test
     public void testGetRootFolder() {
-        
+        String name = (String)emailAccount.getRootFolder().getName();
+        assertEquals("test@gmail.com", name);
     }
-    
 }

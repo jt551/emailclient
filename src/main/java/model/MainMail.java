@@ -22,13 +22,9 @@ public class MainMail {
     private Database database;
     private LoginToMailServer loginToMailServer;    
     private DisplayFolders displayFolders;    
-    private Label userMessageLabel;
-    private AccountDetailsProvider accountDetailsProvider;
-    private ServerDetailsProvider serverDetailsProvider;
+    private Label userMessageLabel;    
 
-    public MainMail(String username, String password, TreeView treeView, Database database, Label userMessageLabel) throws IOException {
-        this.accountDetailsProvider = new HardCodedAccountDetails();
-        this.serverDetailsProvider = new HardCodedServerDetails();
+    public MainMail(String username, String password, TreeView treeView, Database database, Label userMessageLabel) throws IOException {        
         this.database = database;
         this.emailAccount = new EmailAccount(username, password, this.database);
         this.displayFolders = new DisplayFolders(treeView);
@@ -40,15 +36,6 @@ public class MainMail {
         loginToMailServer.start();
         addRootFolderToUI();
     }
-
-    public AccountDetailsProvider getAccountDetailsProvider() {
-        return accountDetailsProvider;
-    }
-
-    public ServerDetailsProvider getServerDetailsProvider() {
-        return serverDetailsProvider;
-    }
-
     
     public String getEmailAddress(){
         return emailAccount.getAddress();

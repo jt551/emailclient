@@ -56,6 +56,12 @@ public class DatabaseTest {
         assertNotNull(db.getConn());
     }
 
+    
+    
+    @Test
+    public void testGetEmailAddress() {
+        assertTrue(db.getEmailAddessByName("gmail").length() > 0);
+    }
     /**
      * Test of getPropertiesByName method, of class Database.
      */

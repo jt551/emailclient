@@ -6,7 +6,6 @@
 package model;
 
 import java.util.Date;
-import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
