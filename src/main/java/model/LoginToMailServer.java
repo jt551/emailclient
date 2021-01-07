@@ -20,8 +20,10 @@ import javax.mail.Session;
 import javax.mail.Store;
 
 /**
- *
- * @author juhat
+ * Class for a background login service.
+ * start() or restart() can be called to login mail service.
+ * With a successful login start another service,
+ * for getting folders from email account. 
  */
 public class LoginToMailServer extends Service {
 
@@ -46,7 +48,11 @@ public class LoginToMailServer extends Service {
             );
         });
     }
-
+    /**
+     * Login to email account and obtain session and store objects for email account class.
+     * Success starts GetFolders service.
+     * Errors are printed to UI.
+     */
     public void login() {
 
         Authenticator authenticator = new Authenticator() {
@@ -78,7 +84,10 @@ public class LoginToMailServer extends Service {
             );
         }
     }
-
+    /**
+     * JAVAFX concurrent task for login.
+     * @return 
+     */
     @Override
     protected Task createTask() {
         return new Task() {

@@ -18,7 +18,7 @@ import javax.mail.internet.MimeMultipart;
 
 /**
  * Class for sending an email.
- * Used by FXMLController EventHandler, that passes required parameters from user interface. 
+ * Used by SendFXMLController EventHandler, that passes required parameters from user interface. 
  * 
  */
 
@@ -31,20 +31,17 @@ public class SendMail {
     private MimeMessage message;
     /**
     * SendMail constructor.    
-    * @param Emailaccount emailAccount message recipient from user interface text field.
-    *  
-    * 
+    * @param Emailaccount
     */
     public SendMail(EmailAccount emailAccount) {
         this.emailAccount = emailAccount;
         this.session = emailAccount.getSession();
     }
     /**
-    * Send created message.
-    * Create new MimeMessage and use Transport to send it.
+    * Create a new email.
+    * Create new MimeMessage with multipart content.
     * 
-    * TODO: add session.
-    * exceptions back to controller
+    * TODO: file attachment as multipart.
     */
     public void createEmail(String to, String subject, String content) {
         try {
@@ -63,7 +60,10 @@ public class SendMail {
             e.printStackTrace();
         }
     }
-    
+    /**
+     * Send email.
+     * Create transport object and use it to send newly created email.
+     */
     public void send(){
         try {
             this.session = emailAccount.getSession();           
@@ -89,7 +89,12 @@ public class SendMail {
     public Session getSession() {
         return session;
     }
-
+    /**
+     * Create email body from HTML editors content as multipart body. 
+     * @param content
+     * @return multipart
+     * @throws MessagingException 
+     */
     private Multipart createMultipart(String content) throws MessagingException {
         
         Multipart multipart = new MimeMultipart();

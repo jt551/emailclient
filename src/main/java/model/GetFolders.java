@@ -78,13 +78,4 @@ public class GetFolders extends Service {
 
         };
     }
-    /*
-    public Folder getInboxFolder() {
-        try {
-            return store.getFolder("inbox");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }*/
 }

@@ -28,9 +28,7 @@ public class SendMailIT {
     
     @Before
     public void setUp() {
-        this.emailAccount = new EmailAccount("account@gmail.com", "pw", database);
-        this.session = emailAccount.getSession();
-        this.sendMail = new SendMail(emailAccount);
+        
     }
 
     /**
@@ -38,6 +36,9 @@ public class SendMailIT {
      */
     @Test
     public void testCreateEmail() throws IOException, MessagingException {
+        this.emailAccount = new EmailAccount("account@gmail.com", "pw", database);
+        this.session = emailAccount.getSession();
+        this.sendMail = new SendMail(emailAccount);
         
         String to = "test@gmail.com";
         String subject = "testsubject";
