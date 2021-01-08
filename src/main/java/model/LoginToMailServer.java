@@ -86,7 +86,8 @@ public class LoginToMailServer extends Service {
     }
     /**
      * JAVAFX concurrent task for login.
-     * @return 
+     * @return null
+     * setOnSucceeded starts getFolders service.
      */
     @Override
     protected Task createTask() {

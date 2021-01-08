@@ -31,7 +31,7 @@ public class SendMail {
     private MimeMessage message;
     /**
     * SendMail constructor.    
-    * @param Emailaccount
+    * @param emailAccount for session.
     */
     public SendMail(EmailAccount emailAccount) {
         this.emailAccount = emailAccount;
@@ -40,7 +40,9 @@ public class SendMail {
     /**
     * Create a new email.
     * Create new MimeMessage with multipart content.
-    * 
+    * @param to from sendFXMLController fields
+    * @param subject from sendFXMLController fields
+    * @param content from sendFXMLController fields
     * TODO: file attachment as multipart.
     */
     public void createEmail(String to, String subject, String content) {
