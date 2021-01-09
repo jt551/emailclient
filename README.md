@@ -6,7 +6,10 @@ https://github.com/jt551/emailclient
 [![Maintainability](https://api.codeclimate.com/v1/badges/2855f35eb5dda00f2b37/maintainability)](https://codeclimate.com/github/jt551/emailclient/maintainability)  
 
 Use only gmail account that contains no valuable information at this stage.  
-  
+
+Start program with java -jar emailclient-1.0-SNAPSHOT.jar  
+.jar file is in /runnablejar folder  
+
 You can login to a account and program gets all email folders with messages (IMAP). 
 Prior to login you can change/save email server settings by pressing settings button or reset them to default. 
 Selecting a folder populates tableview with emails and selecting an email it shows its content in webengine window.  
