@@ -5,18 +5,18 @@ https://github.com/jt551/emailclient
 [![codecov](https://codecov.io/gh/jt551/emailclient/branch/main/graph/badge.svg?token=SK7PA5BVQN)](https://codecov.io/gh/jt551/emailclient)  
 [![Maintainability](https://api.codeclimate.com/v1/badges/2855f35eb5dda00f2b37/maintainability)](https://codeclimate.com/github/jt551/emailclient/maintainability)  
 
-Use only gmail account that contains no valuable information for testing.  
+Use only gmail account that contains no valuable information at this stage.  
   
-Currently you can login to gmail account and program gets all folders with messages.  
-Selecting a folder populates tableview with emails and selecting an email it shows its content in webengine.  
+You can login to a account and program gets all email folders with messages (IMAP). 
+Prior to login you can change/save email server settings by pressing settings button or reset them to default. 
+Selecting a folder populates tableview with emails and selecting an email it shows its content in webengine window.  
 Send new email opens new window and it sends an email.  
   
 Todo:  
-Create Javafx concurrent Service for fetching folders.  
-Create Javafx concurrent Service for login.  
-Write tests and documentation.  
-Settings view with persistence.  
-File attachments?  
-  
+Write javamail mock tests.  
+Handle file attachments.  
+Messagecount listeners to folders or inbox atleast and add new messages to folder.  
+Option to save password encrypted in database file.  
+Upgrade UI.  
 ![alt text](https://github.com/jt551/emailclient/blob/main/screenshot.png)  
 ![alt text](https://github.com/jt551/emailclient/blob/main/screenshot2.png)  

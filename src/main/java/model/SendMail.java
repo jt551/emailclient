@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMultipart;
 /**
  * Class for sending an email.
  * Used by SendFXMLController EventHandler, that passes required parameters from user interface. 
- * 
+ * Creates new email as mime message and sends it to server.
  */
 
 public class SendMail {
